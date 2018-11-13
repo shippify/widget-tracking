@@ -1,0 +1,714 @@
+#shy-tracking-map {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+  height: 352px;
+  border: 6px  solid #ffffff;
+  border-bottom: 0px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+
+a[href*="intent"] {
+  display:inline-block;
+  margin-top: 0.4em;
+}
+
+.rating a,
+.rating label {
+  float:right;
+  color: #aaa;
+  text-decoration: none;
+  -webkit-transition: color .4s;
+  -moz-transition: color .4s;
+  -o-transition: color .4s;
+  transition: color .4s;
+}
+.rating label:hover ~ label,
+.rating input:focus ~ label,
+.rating label:hover,
+.rating a:hover,
+.rating a:hover ~ a,
+.rating a:focus,
+.rating a:focus ~ a		{
+  color: #ef404b;
+  cursor: pointer;
+  font-size: 36px;
+}
+.rating2 {
+  direction: rtl;
+}
+.rating2 a {
+  float:none;
+  font-size: 36px;
+  padding: 6px;
+}
+
+.shy-tracking-rating{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-self: center;
+  justify-content: space-evenly;
+}
+
+.shy-tracking-rating-star{
+  align-self: center;
+}
+
+.shy-tracking-map-additional-phase-overlay{
+  position: fixed;
+  background-color: rgba(0,0,0,0.5);
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.shy-tracking-map-additional-phases-ctn{
+  position: fixed;
+  width: 65%;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  left: 0;
+  top: 60px;
+  z-index: 999999;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+}
+
+.gm-style-pbt{
+  visibility: hidden;
+}
+
+/* #shy-tracking-map > div > div > div:nth-child(1) > div.gm-style-pbc {
+  opacity: 1 !important;
+} */
+
+.shy-tracking-map-additional-phases{
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.98);
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 325px;
+  border-bottom: 0px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+  z-index: 99;
+}
+
+.shy-tracking-map-additional-phases-main-text{
+  font-family: Roboto;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  padding: 16px;
+  color: #757575;
+}
+
+.shy-tracking-map-additional-phases-secondary-text{
+  font-family: Roboto;
+  font-size: 14px;
+  text-align: center;
+  padding: 16px;
+  padding-top: 0px;
+  color: #9e9e9e;
+  padding-bottom: 0px;
+}
+
+.shy-tracking-map-additional-phases-cancelled-img{
+  align-self: center;
+}
+
+
+
+.shy-tracking-map-delivery-info-no-co{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 166px;
+  height: 64px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  position: absolute;
+  margin-top: 24px;
+  margin-left: 24px;
+  z-index: 10000;
+  background-color: white;
+}
+
+.shy-tracking-map-company-logo{
+  width: 80px;
+  height: 80px;
+  border-radius: 190px;
+  border: 3px solid white;
+  background-color: #fff;
+}
+
+.shy-tracking-map-resp-box{
+  display: none;
+}
+
+.shy-tracking-map-gm-card-message{
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  color: #757575;
+  align-self: center;
+  width: auto;
+}
+
+.shy-tracking-map-gm-card-buttons{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.shy-tracking-map-gm-card-button-no{
+  width: 126px;
+  height: 35px;
+  cursor: pointer;
+  border-radius: 3px;
+  background-color: #ef404b;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+  font-family: Roboto;
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+  border: 0;
+  margin-right: 16px;
+}
+
+.shy-tracking-map-gm-card-button-yes{
+  width: 126px;
+  height: 35px;
+  border-radius: 3px;
+  background-color: #12ce66;
+  cursor: pointer;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+  font-family: Roboto;
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+  border: 0;
+}
+
+.shy-tracking-map-gm-card-icon {
+  visibility: visible !important;
+}
+
+.shy-tracking-map-gm-card-icon-ctn{
+  display: flex;
+  align-items: center;
+  padding-right: 16px;
+}
+
+.shy-tracking-map-gm-card-icon{
+  width: 24px;
+  height: 24px;
+}
+
+.shy-tracking-map-gm-card-message-box{
+  display: flex;
+  align-items: center;
+}
+
+.shy-tracking-map-gm-card-status-box{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  width: auto;
+  height: 56px;
+  border-radius: 4px;
+  background-color: #f7f7f7;
+  padding-left: 16px;
+  padding-right: 16px;
+  box-sizing: border-box;
+}
+
+.shy-tracking-map-gm-card-p{
+  height: 97px;
+}
+
+.shy-tracking-map-gm-card{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  width: auto;
+  max-width: 299px;
+  height: 118px;
+  background-color: white;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.shy-tracking-map-gm-card-ctn{
+  padding: 12px;
+}
+
+.infoBox:before {
+  content : " ";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid white;
+  border-bottom: 10px solid transparent;
+  border-top: 10px solid transparent;
+  position:absolute;
+  z-index: 10000;
+  top: 43%;
+  left: -8px;
+}
+
+/* .shy-tracking-map-gm-card:before {
+  content : " ";
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid white;
+  border-bottom: 10px solid transparent;
+  border-top: 10px solid transparent;
+  position:absolute;
+  right:311px;
+  z-index: 10000;
+} */
+
+.shy-tracking-map-gm-card-title{
+  padding-bottom: 16px;
+  font-family: Roboto;
+  font-size: 12px;
+  text-align: center;
+  color: #9e9e9e;
+  width: auto;
+}
+
+.shy-tracking-map-widget-icon-ctn{
+  padding: 20px;
+  padding-left: 57px;
+  padding-right: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.shy-tracking-map-widget-icon-ctn-no-co{
+  padding: 20px;
+  padding-left: 16px;
+  padding-right: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.shy-tracking-map-delivery-info{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 207px;
+  height: 64px;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.08);
+  border-radius: 4px;
+  position: absolute;
+  margin-top: 24px;
+  margin-left: 55px;
+  z-index: 10000;
+  background-color: white;
+}
+
+.shy-tracking-map-company-logo-ctn{
+  position: absolute;
+  margin-top: 13px;
+  margin-left: 13px;
+  z-index: 10000;
+}
+
+.shy-tracking-map-widget-icon{
+  margin: auto;
+}
+
+.shy-tracking-map-icon-ctn{
+  display: flex;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.shy-tracking-map-divider{
+  border-top: 1px solid #e6e6e6;
+  width: 100%;
+  justify-content: center;
+  align-content: center;
+}
+
+.shy-tracking-map-additional-phases-divider{
+  border-top: 1px solid #e6e6e6;
+  width: 5%;
+  padding-bottom: 16px;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
+}
+
+.shy-tracking-map-icon{
+  padding-top: 4px;
+  margin: auto;
+}
+
+.shy-tracking-map-contact{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-bottom: 16px;
+  padding-right: 121px;
+}
+
+.shy-tracking-map-location{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-bottom: 16px;
+  margin-right: auto;
+}
+
+.shy-tracking-map-element-box{
+  padding: 16px;
+  padding-bottom: 0px;
+  padding-right:0px;
+  padding-top: 16px;
+  font-size: 14px;
+  text-align: left;
+  color: #757575;
+}
+
+.shy-tracking-map-info-list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.shy-tracking-map-dimmed-text{
+  font-family: Roboto;
+  font-size: 12px;
+  text-align: left;
+  color: #9e9e9e;
+}
+
+.shy-tracking-map-report-error-btn{
+  color: #ef404b;
+  background-color: white;
+  font-family: Roboto;
+  font-weight: bold;
+  font-size: 14px;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.infoBox img:first-child {
+  visibility: hidden;
+}
+
+.shy-tracking-map-report-error-ctn{
+  display: flex;
+  margin-left: auto;
+}
+
+.infoBox {
+  width: auto;
+}
+
+.shy-tracking-map-footer{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding-right: 16px;
+  padding-left: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  color: #757575;
+  font-size: 14px;
+}
+
+@media screen and (max-width: 1024px) {
+  .shy-v1-modal-content-canceled {
+    width: 70%;
+  }
+
+  .shy-v1-modal-content-completed{
+    width: auto !important;
+  }
+}
+
+@media screen and (max-width: 620px) {
+
+  .shy-tracking-map-gm-card-status-box{
+      padding-left: 8px !important;
+      padding-right: 8px !important;
+  }
+
+  .shy-tracking-modal-error-report-footer{
+    padding-top: 0px !important;
+  }
+
+  .shy-tracking-map-report-error-ctn{
+    padding-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .shy-tracking-map-footer{
+    flex-wrap: wrap
+  }
+
+  .shy-tracking-map-footer > div:first-child{
+    margin-left: auto;
+    text-align: center;
+    margin-right: auto;
+  }
+
+  #shy-tracking-modal-error-report-map-ctn{
+    height: 180px !important;
+  }
+
+  .shy-v1-modal-content-canceled {
+    width: 85% !important;
+  }
+
+  .shy-tracking-map-delivery-info {
+    visibility: hidden;
+  }
+
+  .shy-tracking-map-delivery-info-no-co {
+    visibility: hidden;
+  }
+
+  .shy-tracking-map-company-logo-ctn{
+    z-index: 1;
+  }
+
+  .shy-tracking-map-company-logo{
+    width: 40px;
+    height: 40px;
+    border-radius: 90px;
+    border: 2px solid white;
+    background-color: #fff;
+  }
+
+  .shy-tracking-map-task-id{
+    font-size: 12px;
+    color: white;
+    top: 21px;
+    left: 16px;
+    position: fixed;
+    z-index: 100;
+    visibility: visible;
+  }
+
+  .shy-tracking-map-generic-text{
+    font-size: 10px;
+    color: white;
+    top: 34px;
+    left: 16px;
+    position: fixed;
+    z-index: 100;
+    visibility: visible;
+    align-self: center;
+  }
+
+  .shy-tracking-map-resp-box{
+    display: block;
+    visibility: visible;
+  }
+
+  .shy-tracking-map-contact{
+    padding-right: 16px;
+    width: 100%;
+  }
+
+  .shy-tracking-map-location{
+    padding-right: 16px;
+  }
+
+  .shy-tracking-map-additional-phases-ctn{
+  }
+
+}
+
+.shy-tracking-map-recording-live-box{
+  display: flex;
+  align-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 8px;
+  height: 16px;
+  width: auto;
+  position: absolute;
+  margin-top: 324px;
+  margin-right: 16px;
+  margin-left: 8px;
+  z-index: 1;
+}
+
+
+.shy-tracking-map-recording-live-text{
+  font-family: Roboto;
+  font-size: 14px;
+  text-align: center;
+  font-weight: bold;
+  color: red;
+  align-self: center;
+}
+
+
+.shy-tracking-map-recording-pulse {
+  align-self: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: red;
+  cursor: pointer;
+  box-shadow: 0 0 0 rgba(255,0,0, 0.4);
+  animation: shy-tracking-map-pulse 2s infinite;
+}
+@-webkit-keyframes shy-tracking-map-pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(255,0,0, 0.6);
+  }
+  70% {
+      -webkit-box-shadow: 0 0 0 10px rgba(255,0,0, 0);
+  }
+  100% {
+      -webkit-box-shadow: 0 0 0 0 rgba(255,0,0, 0);
+  }
+}
+@keyframes shy-tracking-map-pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(255,0,0, 0.6);
+    box-shadow: 0 0 0 0 rgba(255,0,0, 0.6);
+  }
+  70% {
+      -moz-box-shadow: 0 0 0 10px rgba(255,0,0, 0);
+      box-shadow: 0 0 0 10px rgba(255,0,0, 0);
+  }
+  100% {
+      -moz-box-shadow: 0 0 0 0 rgba(255,0,0, 0);
+      box-shadow: 0 0 0 0 rgba(255,0,0, 0);
+  }
+}
+
+.#shy-tracking-map > div > div > div:nth-child(2){
+  visibility: hidden !important;
+}
+
+a[href^="http://maps.google.com/maps"]{display:none !important}
+a[href^="https://maps.google.com/maps"]{display:none !important}
+
+.gmnoprint a, .gmnoprint span, .gm-style-cc {
+    display:none;
+}
+
+.shy-v1-modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.icon-v1-margin-right-lg{
+  padding-right: 16px;
+}
+
+.shy-v1-modal-lg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+  .shy-v1-modal-content-canceled {
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  }
+    .shy-v1-modal-content-canceled .shy-v1-modal-close {
+      width: 14px;
+      height: 14px;
+      padding: 13px;
+      top: -20px;
+      right: -20px;
+      cursor: pointer;
+      position: relative;
+      border-radius: 100%;
+    	background-color: white;
+    	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+    }
+    .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-header {
+      color: white;
+      display: flex;
+      font-size: 21px;
+      justify-content: space-between;
+      background-color: #ef404b;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+    .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-header.shy-v1-headerless-modal {
+      height: 0;
+    }
+    .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-header.shy-v1-modal-content-canceled-header-reversed .shy-v1-modal-close {
+      right: 0;
+      left: -20px;
+    }
+    .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-header.shy-v1-modal-content-canceled-header-reversed .shy-v1-modal-header-content-wrapper {
+      margin-left: -40px;
+    }
+      .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-header .shy-v1-modal-header-content-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-header .shy-v1-header-content {
+        display: flex;
+        align-items: center;
+        padding: 16px 0 16px 16px;
+      }
+    .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-body {
+      padding: 16px;
+      border-radius: 4px;
+      background-color: white;
+    }
+      .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-body .shy-v1-modal-content-canceled-body-buttons {
+        margin-top: 32px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .shy-v1-modal-content-canceled .shy-v1-modal-content-canceled-body .shy-v1-modal-content-canceled-body-buttons .shy-btn {
+        width: auto;
+      }
+.shy-tracking-map-blur{
+  text-shadow: 0 0 7px black;
+  color: transparent;
+}

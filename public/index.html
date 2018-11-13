@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="theme-color" content="#000000" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <script
+            type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?v=3&libraries=drawing,places,geometry&key=AIzaSyBGhvLIKDkKTKmSUyE6EmdQwWu4uz3Fbqc"
+        ></script>
+
+        <title>Tracking Page</title>
+    </head>
+    <style>
+        html{
+            background-color: #fff;
+            font-family: 'Roboto, verdana'
+        }
+        .sample-header{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #ef404b;
+            background-color: #fff;
+        }
+        .sample-header-input{
+            height: 40px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            width: 200px;
+            text-align: center;
+        }
+        .sample-header-button {
+            margin-top: 32px;
+            background-color: #ef404b;
+            border: none;
+            padding: 8px;
+            width: 130px;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .sample-tracking{
+            margin-top: 100px;
+            width: 80%;
+        }
+        .sample-tracking #tracking-page{
+            width: 100%
+        }
+        
+    </style>
+    <body>
+        <noscript> You need to enable JavaScript to run this app. </noscript>
+        <div class="sample-header">
+            <h1>MY WEB SITE</h1>
+            <h3>Search by id</h3>
+            <input class="sample-header-input" type="text" id="trackId">
+            <button class="sample-header-button" onclick="callShippify()">SEARCH</button>
+            <div class="sample-tracking">
+                <div id="tracking-page"></div>
+            </div>
+        </div>
+    </body>
+
+    <script>
+        function callShippify (){
+            document.getElementById("trackId").value
+            console.log('el id',document.getElementById("trackId").value );
+            TrackingWidget.search(document.getElementById("trackId").value)
+        }
+
+        const config = {
+            token: "it9ngozz1odh1tt9", //companies token
+            sections: {
+                map: true,
+                events: true,
+                shipper: true,
+                packages: true
+            }
+        };
+
+        TrackingWidget.init(config, "tracking-page");
+    </script>
+</html>

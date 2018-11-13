@@ -1,0 +1,273 @@
+.shy-tracking-modal-error-report-ok-button{
+  width: 95px;
+  height: 35px;
+  border-radius: 3px;
+  background-color: #ef404b;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+  color: white;
+  font-size: 16px;
+  border: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.shy-tracking-modal-error-report-info-text{
+  color: #757575;
+  text-align: left;
+  max-width: inherit;
+  width: inherit;
+  font-size: 12px;
+  white-space: pre-line;
+  width: 553px;
+  padding-bottom: 16px;
+}
+
+.shy-v1-modal-results-content-text{
+  font-size: 14px;
+  color: #757575;
+}
+
+.shy-tracking-modal-error-report-error-msg{
+  color: #ef404b;
+  font-size: 12px;
+  padding-right: 16px;
+  align-self: center;
+}
+
+.shy-tracking-modal-error-report-error-ind-msg{
+  color: #ef404b;
+  padding-top: 4px;
+  font-size: 12px;
+  padding-right: 16px;
+  align-self: left;
+}
+
+.shy-tracking-modal-error-report-ok-button:disabled, .shy-tracking-modal-error-report-ok-button[disabled=disabled]{
+  filter: brightness(70%);
+}
+
+.pac-container {
+  z-index: 100000000 !important;
+}
+
+.pac-container::after {
+  visibility: hidden;
+  height: 0px !important;
+}
+
+.shy-tracking-modal-error-report-dimmed-text{
+  font-family: Roboto;
+  font-size: 12px;
+  text-align: left;
+  color: #9e9e9e;
+  padding-bottom: 4px;
+}
+
+#shy-tracking-modal-error-report-map-ctn{
+  width: 553px;
+  height: 216px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 1px #cccccc;
+  border: 4px solid white;
+}
+
+
+.shy-tracking-modal-error-report-input-full{
+  width: 560px;
+  height: 40px;
+  display: block;
+  margin-top: 8px;
+  margin-right: 0px;
+  padding-left: 8px;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  color: #757575;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.shy-tracking-modal-error-report-input-half{
+  width: 276px;
+  height: 40px;
+  margin-top: 8px;
+  margin-right: 8px;
+  padding-left: 8px;
+  border: 1px solid #cccccc;
+  box-sizing: border-box;
+  color: #757575;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.shy-tracking-modal-error-report-recipient-ctn{
+  max-width: 560px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.shy-tracking-modal-error-report-address-ctn{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 16px;
+}
+
+.shy-tracking-modal-error-report-footer{
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+}
+
+
+.shy-v1-modal {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  display: flex;
+  overflow: auto;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.icon-v1-margin-right-lg{
+  padding-right: 16px;
+}
+
+.shy-v1-modal-lg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.shy-content-report-error-modal{
+  margin-top: 132px;
+  margin-bottom: 16px;
+}
+
+  .shy-v1-modal-content {
+    border-radius: 4px;
+    background-color: white;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  }
+    .shy-v1-modal-content .shy-v1-modal-close {
+      width: 14px;
+      height: 14px;
+      padding: 13px;
+      top: -20px;
+      right: -20px;
+      cursor: pointer;
+      position: relative;
+      border-radius: 100%;
+    	background-color: white;
+    	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+    }
+    .shy-v1-modal-content .shy-v1-modal-content-header {
+      color: white;
+      display: flex;
+      font-size: 21px;
+      justify-content: space-between;
+      background-color: #ef404b;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+    }
+    .shy-v1-modal-content .shy-v1-modal-content-header.shy-v1-headerless-modal {
+      height: 0;
+    }
+    .shy-v1-modal-content .shy-v1-modal-content-header.shy-v1-modal-content-header-reversed .shy-v1-modal-close {
+      right: 0;
+      left: -20px;
+    }
+    .shy-v1-modal-content .shy-v1-modal-content-header.shy-v1-modal-content-header-reversed .shy-v1-modal-header-content-wrapper {
+      margin-left: -40px;
+    }
+      .shy-v1-modal-content .shy-v1-modal-content-header .shy-v1-modal-header-content-wrapper {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .shy-v1-modal-content .shy-v1-modal-content-header .shy-v1-header-content {
+        display: flex;
+        align-items: center;
+        padding: 16px 0 16px 16px;
+      }
+    .shy-v1-modal-content .shy-v1-modal-content-body {
+      padding: 16px;
+      border-radius: 4px;
+      background-color: white;
+    }
+      .shy-v1-modal-content .shy-v1-modal-content-body .shy-v1-modal-content-body-buttons {
+        margin-top: 32px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .shy-v1-modal-content .shy-v1-modal-content-body .shy-v1-modal-content-body-buttons .shy-btn {
+        width: auto;
+      }
+
+.infoBox{
+  width: auto;
+}
+
+@media screen and (max-height: 600px) {
+  .shy-v1-modal-content{
+    margin-top: 225px !important;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  #shy-tracking-modal-error-report-map-ctn{
+    width: auto;
+  }
+
+  .shy-v1-modal-content{
+    width: 90%;
+  }
+
+  .shy-tracking-map-gm-card{
+    padding: 12px;
+  }
+
+  .infoBox{
+    width: 200px;
+  }
+
+  .shy-tracking-map-gm-card-title{
+    padding-bottom: 12px;
+  }
+
+  .shy-tracking-modal-error-report-info-text{
+    width: auto;
+  }
+
+  .shy-tracking-map-gm-card-button-no{
+    margin-right: 12px;
+  }
+
+  .shy-tracking-modal-error-report-input-full{
+    width: auto;
+  }
+
+  .shy-tracking-modal-error-report-recipient-ctn{
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .shy-tracking-modal-error-report-input-half{
+    width: auto;
+    margin-right: 0px;
+  }
+
+}

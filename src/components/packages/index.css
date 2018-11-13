@@ -1,0 +1,41 @@
+#shy-tracking-packages {
+  height: auto;
+  min-height: 168px;
+}
+
+.shy-tracking-package-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.shy-tracking-package-item-qty {
+  width: 16px;
+  padding-right: 10px;
+}
+
+
+.shy-tracking-package-item-desc{
+  text-align: left;
+  width: 100%;
+}
+
+.shy-tracking-package-list{
+
+}
+
+.shy-tracking-package-qty{
+  padding-right: 20px;
+}
+
+.shy-tracking-package-item{
+  display: flex;
+  align-content: flex-end;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-right: 12px;
+  padding-left: 12px;
+  font-size: 14px;
+  text-align: left;
+  color: #757575;
+}
