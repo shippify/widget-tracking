@@ -57,7 +57,7 @@
   width: 316px;
   right: 32px;
   bottom: 32px;
-  transition all: 0.5s;
+  transition-all: 0.5s;
   z-index: 1;
   opacity: 0.95;
   border-radius: 56px;
@@ -69,7 +69,7 @@
   width: 316px;
   right: 32px;
   bottom: 32px;
-  transition all: 0.5s;
+  transition-all: 0.5s;
   z-index: 1;
   opacity: 0.95;
   border-radius: 56px;

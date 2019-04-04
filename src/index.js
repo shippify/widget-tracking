@@ -26,6 +26,8 @@ export function search( id ){
     // const url = new URL('https://api.shippify.co')
     axios.get(`http://localhost:8021/track/${id}?widget=true`)
     .then(function (response) {
+        console.log('DATA - RESPONSE>>>', response);
+        
         const payload =  response.data.data
 
         settings.config.isAuth = true;
