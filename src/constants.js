@@ -4,6 +4,7 @@
  *
  */
 
+export const REQUIRED_FIELD_ERR = 'This is a required field';
 
 /**
  *

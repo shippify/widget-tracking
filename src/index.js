@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Tracking from "./Tracking";
-import Main from "./components/share/main"
-import NotFound from "./components/share/notFound"
+import Main from "./components/shared/main"
+import NotFound from "./components/shared/notFound"
 import axios from 'axios';
 
 export const settings = {

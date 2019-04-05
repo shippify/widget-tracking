@@ -1,8 +1,3 @@
-/**
- * @file index.js
- * @description Map index component
- *
- */
 
 import React from 'react';
 

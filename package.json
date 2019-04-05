@@ -34,9 +34,11 @@
     "fs-extra": "7.0.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
+    "immutable": "^4.0.0-rc.12",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
+    "jquery": "^3.3.1",
     "mini-css-extract-plugin": "0.4.3",
     "moment": "^2.17.1",
     "optimize-css-assets-webpack-plugin": "5.0.1",
@@ -60,11 +62,12 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "devDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "core-libs": "git+https://oauth2:kGTfXLf4aexz3MHaQDQ5@gitlab.com/shippify/core-libs.git#1.0.21",
     "react-google-maps": "^9.4.5",
     "react-images": "^0.5.19",
     "react-photo-gallery": "^6.1.2",
-    "socket.io-client": "^2.0.4",
-    "core-libs": "git+https://oauth2:kGTfXLf4aexz3MHaQDQ5@gitlab.com/shippify/core-libs.git#1.0.21"
+    "socket.io-client": "^2.0.4"
   },
   "scripts": {
     "start": "node scripts/start.js",

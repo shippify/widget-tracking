@@ -1,3 +1,28 @@
+.margin-top-m {
+  margin-top: 16px;
+}
+
+.shy-report-error-fields {
+  display: flex;
+  align-items: flex-start;
+}
+.shy-report-error-field {
+  width: 50%;
+}
+.shy-report-error-field:first-of-type {
+  margin-right: 8px;
+}
+.shy-report-error-field:last-of-type {
+  margin-left: 8px;
+  margin-top: 20px;
+}
+
+.shy-report-error-dialog {
+  width: 500px;
+}
+
+
+
 .shy-tracking-modal-error-report-ok-button{
   width: 95px;
   height: 35px;
@@ -64,11 +89,12 @@
 }
 
 #shy-tracking-modal-error-report-map-ctn{
-  width: 553px;
+  width: 100%;
   height: 216px;
   border-radius: 3px;
   box-shadow: 0 0 0 1px #cccccc;
   border: 4px solid white;
+  box-sizing: border-box;
 }
 
 

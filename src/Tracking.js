@@ -14,7 +14,7 @@ import TrackingEvents from "./components/events";
 import TrackingShipper from "./components/shipper";
 import TrackingPackages from "./components/packages";
 import TrackingErrorReport from "./components/errorReport";
-
+import { getRoute } from './routing';
 import "./index.css";
 
 window.translate = function(string) {
@@ -23,7 +23,7 @@ window.translate = function(string) {
 
 const google = window.google;
 let socket;
-const directionsService = new google.maps.DirectionsService();
+
 
 const CMD_SHIPPER_STATUS_UPDATE = "UpdateLocation";
 const CMD_DELIVERY_STATUS_UPDATE = "update_status_task";
@@ -250,116 +250,125 @@ class Tracking extends React.Component {
     }
     shipperStatusUpdate(data) {
         const self = this;
-        const shipper = this.state.shipper || {};
-        if (typeof data.location == "string") {
-            let parsedData = JSON.parse(data.location);
-            data.location = parsedData;
-            data.lat = parseFloat(data.location.lat);
-            data.lng = parseFloat(data.location.lng);
-        }
-        const dropoffLocation = new google.maps.LatLng(
-            this.state.delivery.dropoff.location.lat,
-            this.state.delivery.dropoff.location.lng
-        );
-
-        shipper.location = shipper.location || new google.maps.LatLng(data.lat, data.lng);
-
-        let bounds = new google.maps.LatLngBounds();
-        bounds.extend(dropoffLocation);
-        if (shipper.location) {
-            bounds.extend(shipper.location);
-        }
-        this.setState({
-            mapBounds: bounds
-        });
-
-        if (!shipper.isAnimating) {
-            shipper.firstPolyline = new google.maps.Polyline({
-                path: []
-            });
-            shipper.secondPolyline = new google.maps.Polyline({
-                path: []
-            });
-        }
-
-        if (shipper.isAnimating) {
-            shipper.isAnimating = false;
-            shipper.firstPolyline = new google.maps.Polyline({
-                path: []
-            });
-            shipper.secondPolyline = new google.maps.Polyline({
-                path: []
-            });
-        }
-
-        const request = {
-            origin: {
-                lat: shipper.location.lat(),
-                lng: shipper.location.lng()
-            },
-            destination: {
-                lat: this.props.data.delivery.dropoff.location.lat,
-                lng: this.props.data.delivery.dropoff.location.lng
-            },
-            waypoints: [
-                {
-                    location: {
-                        lat: data.lat,
-                        lng: data.lng
-                    },
-                    stopover: true
-                }
-            ],
-            travelMode: google.maps.TravelMode.DRIVING
-        };
-
-        directionsService.route(request, function(response, status) {
-            if (status === google.maps.DirectionsStatus.OK) {
-                const path = response.routes[0].overview_path;
-                const legs = response.routes[0].legs;
-                const steps = legs[0].steps;
-                if (!shipper.isAnimating) {
-                    shipper.isAnimating = true;
-                    shipper.startLocation = legs[0].start_location;
-                    shipper.endLocation = legs[0].end_location;
-                    for (let j = 0; j < steps.length; j++) {
-                        const nextSegment = steps[j].path;
-                        for (var k = 0; k < nextSegment.length; k++) {
-                            shipper.firstPolyline.getPath().push(nextSegment[k]);
-                        }
-                    }
-                    self.setState(
-                        { shipper, deliveryPolyline: new google.maps.Polyline({ path }) },
-                        () => {
-                            self.animateShipper();
-                        }
-                    );
-                } else {
-                    const heading = google.maps.geometry.spherical.computeHeading(
-                        shipper.location,
-                        dropoffLocation
-                    );
-                    shipper.rotation = heading;
-                    self.setState({ shipper });
-                }
-            } else {
-                shipper.isAnimating = false;
-                shipper.location = new google.maps.LatLng(data.lat, data.lng);
-                self.setState({ shipper });
+        if (((new Date().getTime() - this.state.lastShipperUpdateTime)/1000) > 10) {
+          this.setState({
+            lastShipperUpdateTime: new Date().getTime()
+          }, () => {
+            const shipper = this.state.shipper || {};
+            if (typeof(data.location) == "string"){
+              let parsedData = JSON.parse(data.location);
+              data.location = parsedData;
+              data.lat = parseFloat(data.location.lat);
+              data.lng = parseFloat(data.location.lng);
             }
-        });
-    }
-    animate(d) {
+            const dropoffLocation = new google.maps.LatLng(
+              this.state.delivery.dropoff.location.lat,
+              this.state.delivery.dropoff.location.lng
+            )
+    
+            shipper.location = shipper.location || new google.maps.LatLng(
+              data.lat,
+              data.lng
+            );
+    
+            let bounds = new google.maps.LatLngBounds();
+            bounds.extend(dropoffLocation);
+            if (shipper.location){
+              bounds.extend(shipper.location);
+            }
+            self.setState({
+              mapBounds: bounds
+            })
+    
+            if (!shipper.isAnimating){
+              shipper.firstPolyline = new google.maps.Polyline({
+                path: []
+              })
+              shipper.secondPolyline = new google.maps.Polyline({
+                path: []
+              });
+            }
+    
+            if (shipper.isAnimating){
+              shipper.isAnimating = false;
+              shipper.firstPolyline = new google.maps.Polyline({
+                path: []
+              })
+              shipper.secondPolyline = new google.maps.Polyline({
+                path: []
+              });
+            }
+    
+            getRoute([
+              {
+                latitude: shipper.location.lat(),
+                longitude: shipper.location.lng()
+              }, {
+                latitude: this.props.data.delivery.dropoff.location.lat,
+                longitude: this.props.data.delivery.dropoff.location.lng
+              }
+            ], { lat: data.lat, lng: data.lng }).then(route => {
+              if (!shipper.isAnimating) {
+                shipper.isAnimating = true;
+                shipper.startLocation = route.legs[0].start_location
+                shipper.endLocation = route.legs[0].end_location
+                if (route.isUsingGraphhopper) {
+                  for (var i=0; i<route.steps.length; i++) {
+                    const interval = route.steps[i];
+                    for (var j=0; j<interval.length; j++) {
+                      shipper.firstPolyline.getPath().push(
+                        new google.maps.LatLng(
+                          route.points[interval[j]].latitude,
+                          route.points[interval[j]].longitude
+                        )
+                      )
+                    }
+                  }
+                } else {
+                  const steps = route.googleSteps;
+                  for (let j=0; j<steps.length; j++) {
+                    const nextSegment = steps[j].path;
+                    for (var k=0; k<nextSegment.length; k++) {
+                      shipper.firstPolyline.getPath().push(nextSegment[k]);
+                    }
+                  }
+                }
+                self.setState(
+                  {
+                    shipper,
+                    deliveryPolyline: new google.maps.Polyline({
+                      path: route.points.map((p) => ({
+                        lat: p.latitude,
+                        lng: p.longitude
+                      }))
+                    })
+                  }, () => {
+                    self.animateShipper()
+                  }
+                )
+              } else {
+                const heading = google.maps.geometry.spherical.computeHeading(
+                  shipper.location,
+                  dropoffLocation
+                );
+                shipper.rotation = heading;
+                self.setState({ shipper })
+              }
+            })
+          })
+        }
+      }
+      animate(d) {
         const shipper = this.state.shipper;
         if (!shipper.isAnimating) {
-            shipper.isAnimating = false;
-            return;
+          shipper.isAnimating = false;
+          return;
         }
         if (d > shipper.eol) {
-            shipper.location = shipper.endLocation;
-            shipper.isAnimating = false;
-            this.setState({ shipper });
-            return;
+          shipper.location = shipper.endLocation;
+          shipper.isAnimating = false;
+          this.setState({ shipper })
+          return;
         }
         const p = shipper.firstPolyline.GetPointAtDistance(d);
         const lastPosition = shipper.location;
@@ -367,73 +376,69 @@ class Tracking extends React.Component {
         shipper.rotation = google.maps.geometry.spherical.computeHeading(lastPosition, p);
         //shipper.timerHandle = setTimeout(this.animate(d+5), 80);
         if (shipper.secondPolyline.getPath().getLength() > 20) {
-            shipper.secondPolyline = new google.maps.Polyline([
-                shipper.firstPolyline.getPath().getAt(shipper.lastVertex - 1)
-            ]);
+          shipper.secondPolyline = new google.maps.Polyline(
+            [shipper.firstPolyline.getPath().getAt(shipper.lastVertex - 1)]
+          );
         }
         if (shipper.firstPolyline.GetIndexAtDistance(d) < shipper.lastVertex + 2) {
-            if (shipper.secondPolyline.getPath().getLength() > 1) {
-                shipper.secondPolyline
-                    .getPath()
-                    .removeAt(shipper.secondPolyline.getPath().getLength() - 1);
-            }
-            shipper.secondPolyline
-                .getPath()
-                .insertAt(
-                    shipper.secondPolyline.getPath().getLength(),
-                    shipper.firstPolyline.GetPointAtDistance(d)
-                );
+          if (shipper.secondPolyline.getPath().getLength() > 1) {
+            shipper.secondPolyline.getPath().removeAt(shipper.secondPolyline.getPath().getLength() - 1);
+          }
+          shipper.secondPolyline.getPath().insertAt(
+            shipper.secondPolyline.getPath().getLength(),
+            shipper.firstPolyline.GetPointAtDistance(d)
+          );
         } else {
-            shipper.secondPolyline
-                .getPath()
-                .insertAt(shipper.secondPolyline.getPath().getLength(), shipper.endLocation);
+          shipper.secondPolyline.getPath().insertAt(
+            shipper.secondPolyline.getPath().getLength(),
+            shipper.endLocation
+          );
         }
         setTimeout(() => {
-            this.setState({ shipper }, () => {
-                this.animate(d + 5);
-            });
+          this.setState({ shipper }, () => {
+            this.animate(d+5)
+          })
         }, 80);
-    }
-    animateShipper() {
+      }
+      animateShipper() {
         const shipper = this.state.shipper;
         shipper.eol = shipper.firstPolyline.Distance();
         shipper.location = shipper.firstPolyline.getPath().getAt(0);
         shipper.secondPolyline = new google.maps.Polyline({
-            path: [shipper.firstPolyline.getPath().getAt(0)]
+          path: [shipper.firstPolyline.getPath().getAt(0)]
         });
         this.setState({ shipper }, () => this.animate(5));
-    }
-    openModal() {
+      }
+      openModal() {
         this.setState({ isModalOpen: true });
-    }
-    closeModal() {
+      }
+      closeModal() {
         this.setState({ isModalOpen: false });
-    }
-    updateDeliveryInfo(data) {
+      }
+      updateDeliveryInfo(data) {
         let previousState = JSON.parse(JSON.stringify(this.state.delivery));
         previousState.recipient = {
-            email: data.mail,
-            name: data.recipient,
-            phonenumber: data.phoneNumber
-        };
+          email: data.mail,
+          name: data.recipient,
+          phonenumber: data.phoneNumber
+        }
         previousState.dropoff.location = {
-            address: data.long_address,
-            lat: data.lat,
-            lng: data.lng,
-            instructions: data.apt_address
-        };
+          address: data.long_address,
+          lat: data.lat,
+          lng: data.lng,
+          instructions: data.apt_address
+        }
         this.setState({
-            delivery: previousState
-        });
-    }
-    updateMapCenter(lat, lng) {
+          delivery: previousState
+        })
+      }
+      updateMapCenter(lat, lng) {
         this.setState({
-            map: {
-                lat,
-                lng
-            }
-        });
-    }
+          map: {
+            lat, lng
+          }
+        })
+      }
     render() {
         const { sections } = this.props;
 

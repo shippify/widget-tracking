@@ -150,3 +150,26 @@ html, body, #tracking-page, .shy-tracking-page {
   }
 
 }
+
+.shy-btn {
+  min-height: 35px;
+  min-width: 95px;
+  border: none;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+  text-transform: uppercase;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+}
+.shy-btn-primary {
+  color: #fff;
+  background-color: #ef404b;
+}

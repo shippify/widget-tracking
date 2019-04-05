@@ -1,0 +1,121 @@
+/**
+ * @file: dialog.css
+ * @description: dialog styles
+ */
+
+.shy-dialog {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  overflow: auto;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-family: Roboto;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+}
+  .shy-dialog-content-wrapper {
+    margin: auto;
+    padding: 40px;
+  }
+    .shy-dialog-content {
+      border-radius: 4px;
+      background-color: #fff;
+    }
+      .shy-dialog-content .shy-dialog-header {
+        height: 56px;
+        color: white;
+        display: flex;
+        padding: 0 16px;
+        font-size: 21px;
+        align-items: center;
+        background-color: #ef404b;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        justify-content: space-between;
+      }
+        .shy-dialog-content .shy-dialog-header.shy-dialog-header-hidden {
+          height: 0;
+        }
+          .shy-dialog-content .shy-dialog-header.shy-dialog-header-hidden .shy-dialog-close {
+            margin-top: 0;
+          }
+        .shy-dialog-content .shy-dialog-header .shy-dialog-header-content {
+          display: flex;
+          align-items: center;
+        }
+          .shy-dialog-content .shy-dialog-header .shy-dialog-header-content img {
+            width: 24px;
+            height: 24px;
+            margin-right: 16px;
+          }
+        .shy-dialog-content .shy-dialog-header .shy-dialog-close {
+          width: 14px;
+          height: 14px;
+          margin-top: -56px;
+          margin-right: -36px;
+          background-color: #fff;
+          padding: 13px;
+          cursor: pointer;
+          border-radius: 50%;
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+        }
+      .shy-dialog-content .shy-dialog-body {
+        padding: 16px;
+        box-sizing: border-box;
+        border-bottom-right-radius: 3px;
+        border-bottom-left-radius: 3px;
+        -webkit-transition: max-width 1s ease, max-height 1s ease;
+        -moz-transition: max-width 1s ease, max-height 1s ease;
+        -o-transition: max-width 1s ease, max-height 1s ease;
+        transition: max-width 1s ease, max-height 1s ease;
+      }
+        .shy-dialog-content .shy-dialog-body .shy-dialog-body-text-detail {
+          font-family: Roboto;
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: normal;
+          color: #9e9e9e;
+          text-align: left;
+        }
+        .shy-dialog-content .shy-dialog-body.shy-dialog-body-sm {
+          width: 360px;
+        }
+        .shy-dialog-content .shy-dialog-body .shy-dialog-body-buttons {
+          display: flex;
+          margin-top: 32px;
+          justify-content: flex-end;
+        }
+          .shy-dialog-content .shy-dialog-body .shy-dialog-body-buttons .shy-btn {
+            margin-left: 16px;
+          }
+  .shy-dialog-text {
+    font-size: 14px;
+  	letter-spacing: -0.1px;
+  	color: #757575;
+  }
+  .shy-dialog-body-success,
+  .shy-dialog-body-error,
+  .shy-dialog-body-idle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px 0;
+  }
+    .shy-dialog-body-success span,
+    .shy-dialog-body-error span,
+    .shy-dialog-body-idle span {
+      font-size: 21px;
+    	font-weight: bold;
+    	text-align: center;
+    	color: #626262;
+      margin-top: 16px;
+    }
