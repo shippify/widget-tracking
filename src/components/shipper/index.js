@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-
+import {openChatWindow} from '@helpers'
 import './index.css';
 
 /**
@@ -16,19 +16,18 @@ class TrackingShipper extends React.Component {
     super(props);
     this.state = {
       animate: false,
+      settingChat: this.props.preferences ? this.props.preferences.tracking_chat : false,
       showChat: false,
       showChatButton: false,
       chatButtonMessage: undefined,
       chatButtonState: undefined
     }
-    this.showShipperChat = this.showShipperChat.bind(this);
-    this.closeShipperChat = this.closeShipperChat.bind(this);
   }
   componentDidMount() {
     setTimeout(() => this.setState({ animate: true }), 5000);
     setTimeout(() => this.setState({ animate: false }), 15000);
   }
-  showShipperChat(){
+  showShipperChat = () =>{
     this.setState({
       showChat: true
     });
@@ -54,13 +53,14 @@ class TrackingShipper extends React.Component {
         id: this.props.shipper.information.shipperId
       }
     }
-    window.openChatWindow(deliveryObj);
+    openChatWindow(deliveryObj, this.props.isMonitor);
   }
-  closeShipperChat(){
+  closeShipperChat = () => {
     this.setState({
       showChat: false
     });
   }
+  
   render() {
     let showChatButton = false;
     let chatButtonMessage = "";
@@ -146,34 +146,38 @@ class TrackingShipper extends React.Component {
                 </div>
               </div>
             </div>
-            {
-              (showChatButton && !chatButtonState) &&
-              <div id="shy-tracking-shipper-rad" className={(this.state.animate) ? "shy-tracking-shipper-radial open opaque" : "shy-tracking-shipper-radial opaque"}>
-                <div className={(this.state.animate)? "shy-tracking-shipper-radial-text" : "shy-tracking-shipper-radial-text hidden"}>
-                  {chatButtonMessage}
-                </div>
-                <button
-                  className="shy-tracking-shipper-chat-icon-container"
-                  onClick={this.showShipperChat}
-                  disabled={!chatButtonState}>
-                    <img alt="" className="shy-tracking-shipper-chat-icon" src="https://cdn.shippify.co/icons/icon-messenger-white.svg"></img>
-                </button>
+            { this.state.settingChat &&
+              <div>
+                {
+                  (showChatButton && !chatButtonState) &&
+                  <div id="shy-tracking-shipper-rad" className={(this.state.animate) ? "shy-tracking-shipper-radial open opaque" : "shy-tracking-shipper-radial opaque"}>
+                    <div className={(this.state.animate)? "shy-tracking-shipper-radial-text" : "shy-tracking-shipper-radial-text hidden"}>
+                      {chatButtonMessage}
+                    </div>
+                    <button
+                      className="shy-tracking-shipper-chat-icon-container"
+                      onClick={this.showShipperChat}
+                      disabled={!chatButtonState}>
+                        <img alt="" className="shy-tracking-shipper-chat-icon" src="https://cdn.shippify.co/icons/icon-messenger-white.svg"></img>
+                    </button>
+                  </div>
+                }
+                {
+                  (showChatButton && chatButtonState) &&
+                  <div id="shy-tracking-shipper-rad" className={(this.state.animate) ? "shy-tracking-shipper-radial open" : "shy-tracking-shipper-radial"}>
+                    <div className={(this.state.animate)? "shy-tracking-shipper-radial-text" : "shy-tracking-shipper-radial-text hidden"}>
+                      {chatButtonMessage}
+                    </div>
+                    <button
+                      className="shy-tracking-shipper-chat-icon-container"
+                      onClick={this.showShipperChat}
+                      disabled={!chatButtonState}>
+                        <img alt="" className="shy-tracking-shipper-chat-icon" src="https://cdn.shippify.co/icons/icon-messenger-white.svg"></img>
+                    </button>
+                  </div>
+                }
               </div>
-            }
-            {
-              (showChatButton && chatButtonState) &&
-              <div id="shy-tracking-shipper-rad" className={(this.state.animate) ? "shy-tracking-shipper-radial open" : "shy-tracking-shipper-radial"}>
-                <div className={(this.state.animate)? "shy-tracking-shipper-radial-text" : "shy-tracking-shipper-radial-text hidden"}>
-                  {chatButtonMessage}
-                </div>
-                <button
-                  className="shy-tracking-shipper-chat-icon-container"
-                  onClick={this.showShipperChat}
-                  disabled={!chatButtonState}>
-                    <img alt="" className="shy-tracking-shipper-chat-icon" src="https://cdn.shippify.co/icons/icon-messenger-white.svg"></img>
-                </button>
-              </div>
-            }
+            }  
           </div>
         }
         {

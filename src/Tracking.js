@@ -109,15 +109,7 @@ class Tracking extends React.Component {
                 )
             )
         };
-        this.animate = this.animate.bind(this);
-        this.openModal = this.openModal.bind(this);
-        this.closeModal = this.closeModal.bind(this);
-        this.listenEvents = this.listenEvents.bind(this);
-        this.animateShipper = this.animateShipper.bind(this);
-        this.updateMapCenter = this.updateMapCenter.bind(this);
-        this.updateDeliveryInfo = this.updateDeliveryInfo.bind(this);
-        this.shipperStatusUpdate = this.shipperStatusUpdate.bind(this);
-        this.deliveryStatusUpdate = this.deliveryStatusUpdate.bind(this);
+
     }
     componentDidMount() {
         this.listenEvents(
@@ -198,7 +190,7 @@ class Tracking extends React.Component {
     isCanceled(status) {
         return status === DeliveryStatus.canceled;
     }
-    listenEvents(deliveryId, shipperId) {
+    listenEvents = (deliveryId, shipperId) => {
         const self = this;
         // socket = io("wss://live.shippify.co");
         socket = io("http://staging.shippify.co:3001");
@@ -219,7 +211,7 @@ class Tracking extends React.Component {
         });
         window.socket = socket;
     }
-    deliveryStatusUpdate(data) {
+    deliveryStatusUpdate = (data) => {
         const events = (this.state.delivery && this.state.delivery.events) || [];
         events.push({
             deliveryStatus: data._status,
@@ -248,7 +240,7 @@ class Tracking extends React.Component {
             }
         );
     }
-    shipperStatusUpdate(data) {
+    shipperStatusUpdate = (data) => {
         const self = this;
         if (((new Date().getTime() - this.state.lastShipperUpdateTime)/1000) > 10) {
           this.setState({
@@ -400,7 +392,7 @@ class Tracking extends React.Component {
           })
         }, 80);
       }
-      animateShipper() {
+      animateShipper = () => {
         const shipper = this.state.shipper;
         shipper.eol = shipper.firstPolyline.Distance();
         shipper.location = shipper.firstPolyline.getPath().getAt(0);
@@ -409,13 +401,13 @@ class Tracking extends React.Component {
         });
         this.setState({ shipper }, () => this.animate(5));
       }
-      openModal() {
+      openModal = () => {
         this.setState({ isModalOpen: true });
       }
-      closeModal() {
+      closeModal = () => {
         this.setState({ isModalOpen: false });
       }
-      updateDeliveryInfo(data) {
+      updateDeliveryInfo = (data) => {
         let previousState = JSON.parse(JSON.stringify(this.state.delivery));
         previousState.recipient = {
           email: data.mail,
@@ -432,7 +424,7 @@ class Tracking extends React.Component {
           delivery: previousState
         })
       }
-      updateMapCenter(lat, lng) {
+      updateMapCenter = (lat, lng) => {
         this.setState({
           map: {
             lat, lng
@@ -441,7 +433,6 @@ class Tracking extends React.Component {
       }
     render() {
         const { sections } = this.props;
-
         return (
             <div className="shy-tracking-page">
                 {this.state.preferences && (
@@ -472,6 +463,7 @@ class Tracking extends React.Component {
                                 updateInfo={this.updateDeliveryInfo}
                                 lat={this.state.delivery.dropoff.location.lat}
                                 lng={this.state.delivery.dropoff.location.lng}
+                                token={this.state.token}
                             />
                         </div>
                     )}
@@ -569,6 +561,7 @@ class Tracking extends React.Component {
                                             user={this.state.user}
                                             isMonitor={this.state.isMonitor}
                                             isAuth={this.props.isAuth}
+                                            preferences = {this.state.preferences}
                                         />
                                     </div>
                                 )}

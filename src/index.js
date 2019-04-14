@@ -1,45 +1,43 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Tracking from "./Tracking";
-import Main from "./components/shared/main"
 import NotFound from "./components/shared/notFound"
 import axios from 'axios';
-
+import $ from 'jquery';
+import {loadSourceChat} from '@helpers';
 export const settings = {
     config: undefined,
     element: 'tracking-page'
 }
 
-export function init( config, element ) {
-    console.log('settings before', config);
-
-    settings.config = config;
-    settings.element = element;
-    console.log('settings init', settings);
+export function search( id , token , settings){
     
-    ReactDOM.render(<Main />, document.getElementById(element));
-
-}
-
-export function search( id ){
-    
-    // const url = new URL('https://api.shippify.co')
-    axios.get(`http://localhost:8021/track/${id}?widget=true`)
+    loadSourceChat();
+    // axios.get(`https://api.shippify.co/track/${id}?token=${token}&widget=true`)
+    axios.get(`http://localhost:8021/track/${id}?token=${token}&widget=true`)
     .then(function (response) {
-        console.log('DATA - RESPONSE>>>', response);
         
         const payload =  response.data.data
-
+        console.log('DATA - RESPONSE>>>', payload);
+        settings.config={};
+        settings.config.token = payload.token;
         settings.config.isAuth = true;
         settings.config.data = payload.data;
         settings.config.user = payload.env;
         settings.config.isMonitor = false;
-        
-        ReactDOM.hydrate(<Tracking {...settings.config} />, document.getElementById(settings.element));
+        $('#'+ settings.element).css('position', 'relative')
+        ReactDOM.render(<Tracking {...settings} {...settings.config} />, document.getElementById(settings.element), () => { 
+            if (!document.getElementById('my-chat')) {
+            $('#tracking-page').append('<div id="my-chat" style="position: absolute;z-index: 9000000;height: 500px;width: 370px;bottom: 0px;right: 0;"></div>')
+            }
+        }
+    );
         
     })
     .catch(function (error) {
-        ReactDOM.hydrate(<NotFound />, document.getElementById(settings.element));
+        console.log('ERROR>>>', error);
+        
+        ReactDOM.render(<NotFound />, document.getElementById(settings.element));
     });
-
+    
 }
