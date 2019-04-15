@@ -5,20 +5,15 @@ import NotFound from "./components/shared/notFound"
 import axios from 'axios';
 import $ from 'jquery';
 import {loadSourceChat} from '@helpers';
-export const settings = {
-    config: undefined,
-    element: 'tracking-page'
-}
 
-export function search( id , token , settings){
+
+export function init( id , token , settings){
     
     loadSourceChat();
-    // axios.get(`https://api.shippify.co/track/${id}?token=${token}&widget=true`)
-    axios.get(`http://localhost:8021/track/${id}?token=${token}&widget=true`)
+    axios.get(`https://api.shippify.co/track/${id}?token=${token}&widget=true`)
     .then(function (response) {
         
         const payload =  response.data.data
-        console.log('DATA - RESPONSE>>>', payload);
         settings.config={};
         settings.config.token = payload.token;
         settings.config.isAuth = true;

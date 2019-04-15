@@ -6,7 +6,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="theme-color" content="#000000" />
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-        <!-- <script src="https://cdn.shippify.co/dash/src/chat/clientChat.1.1.js" type="text/javascript"></script> -->
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
         <script
@@ -81,8 +80,7 @@
         function callShippify (){
             var delivery_id = document.getElementById("trackId").value
             var security_token = 'FmPSMFPvQD6s5Vwnm5phDs'
-            console.log('el id',document.getElementById("trackId").value );
-            TrackingWidget.search(delivery_id, security_token, config)
+            TrackingWidget.init(delivery_id, security_token, config)
         }
         
     </script>
