@@ -25,13 +25,20 @@ const config = {
         shipper: true,
         packages: true
     },
-    element: "tracking-page"
+    element: "#tracking-page"
 };
 ```
+Render html
+```html
+<div id="tracking-page"></div>
+```
+
 Render
 ```js
 TrackingWidget.init(
-  domElement,token, config
+  deliveryId ,
+  token, 
+  config
 );
 ```
 

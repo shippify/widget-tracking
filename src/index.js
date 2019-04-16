@@ -21,7 +21,7 @@ export function init( id , token , settings){
         settings.config.user = payload.env;
         settings.config.isMonitor = false;
         $('#'+ settings.element).css('position', 'relative')
-        ReactDOM.render(<Tracking {...settings} {...settings.config} />, document.getElementById(settings.element), () => { 
+        ReactDOM.render(<Tracking {...settings} {...settings.config} />, $(settings.element), () => { 
             if (!document.getElementById('my-chat')) {
             $('#tracking-page').append('<div id="my-chat" style="position: absolute;z-index: 9000000;height: 500px;width: 370px;bottom: 0px;right: 0;"></div>')
             }
