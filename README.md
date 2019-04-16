@@ -1,6 +1,6 @@
-# Tracking
+# Tracking Web Widget
 
-This library provide tracking page components.
+This widget provides tracking page components that will allow you to embed the real time experience of a prime delivery in your own digital products.
 
 ### Usage for integration 
 
